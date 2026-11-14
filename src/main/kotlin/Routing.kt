@@ -26,6 +26,8 @@ suspend fun Application.configureRouting() {
                 call.respond(HttpStatusCode.BadRequest)
             } catch (_: SerializationException) {
                 call.respond(HttpStatusCode.BadRequest)
+            } catch (ex: IllegalArgumentException) {
+                call.respond(HttpStatusCode.BadRequest)
             }
 
         }

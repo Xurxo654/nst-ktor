@@ -78,5 +78,21 @@ class ServerTest {
         assertContains(studios, studio)
     }
 
-
+    @Test
+    fun `cannot create studio with duplicate code`() = testApplication {
+        application {
+            configureTestApp()
+        }
+        val client = createClient {
+            install(ContentNegotiation) {
+                json()
+            }
+        }
+        val studio = Studio("GirlsWay", "GW")
+        val response = client.post("/studios") {
+            header(HttpHeaders.ContentType, ContentType.Application.Json)
+            setBody(studio)
+        }
+        assertEquals(HttpStatusCode.BadRequest, response.status)
+    }
 }

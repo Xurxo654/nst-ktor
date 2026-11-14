@@ -11,6 +11,9 @@ class ListStudioRepository: StudioRepository {
     override fun allStudios(): List<Studio> = studios
 
     override fun addStudio(studio: Studio) {
+        if (studios.map { it -> it.code }.contains(studio.code)) {
+            throw IllegalArgumentException("${studio.code} already in use")
+        }
         studios.add(studio)
     }
 }
