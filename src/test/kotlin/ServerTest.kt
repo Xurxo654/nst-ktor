@@ -5,22 +5,38 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.application.Application
+import io.ktor.server.plugins.di.dependencies
 import io.ktor.server.testing.*
 import kotlin.test.*
+
+suspend fun Application.configureTestApp() {
+    dependencies {
+        provide<StudioRepository> {
+            ListStudioRepository()
+        }
+    }
+    configureSerialization()
+    configureRouting()
+}
 
 class ServerTest {
 
     @Test
     fun `test studio get endpoint`() = testApplication {
         // loads default configuration
-        configure()
+        application {
+            configureTestApp()
+        }
         // verify server studios returns 200
         assertEquals(HttpStatusCode.OK, client.get("/studios").status)
     }
 
     @Test
     fun `studios can be retrieved`() = testApplication {
-        configure()
+        application {
+            configureTestApp()
+        }
         val client = createClient {
             install(ContentNegotiation) {
                 json()
@@ -37,5 +53,30 @@ class ServerTest {
         )
         assertContentEquals(expectedStudios, results)
     }
+
+    @Test
+    fun `new studio can be created`() = testApplication {
+        application {
+            configureTestApp()
+        }
+        val client = createClient {
+            install(ContentNegotiation) {
+                json()
+            }
+        }
+        val studio = Studio("Webyoung", "WY")
+        val postResponse = client.post("/studios") {
+            header(HttpHeaders.ContentType, ContentType.Application.Json)
+            setBody(studio)
+        }
+        assertEquals(HttpStatusCode.Created, postResponse.status)
+
+        val getResponse = client.get("/studios")
+        assertEquals(HttpStatusCode.OK, getResponse.status)
+
+        val studios = getResponse.body<List<Studio>>()
+        assertContains(studios, studio)
+    }
+
 
 }
