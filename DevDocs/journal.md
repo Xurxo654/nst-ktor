@@ -4,3 +4,13 @@ This is my attempt to make the naughty stuff and things api utilizing kotlin and
 ## Progress
 - Started requirements for Studio
 - Started Implementation and testing for studio requirements 
+# 26-11-24
+## Progress
+- Added a post endpoint to studios
+  - to support this I created a `StudioRepository`interface and a list based implementation for it
+  - I also added the dependency injection plugin to support injection the `StudioRepository` into `Routing.kt`
+- Created the requirement "post endpoint should not allow creation of duplicate studio codes"
+- Added test for requirement "post endpoint should not allow creation of duplicate studio codes"
+- Refactored studios POST endpoint to prevent creation of duplicate studio codes
+  - refactored ListStudioRepository to throw an `IllegalArgumentException` when there is an existing studio with the code of the new studio
+  - refactored `Routing.kt` to catch an `IllegalArgumentException`
