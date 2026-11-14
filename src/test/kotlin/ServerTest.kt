@@ -95,4 +95,34 @@ class ServerTest {
         }
         assertEquals(HttpStatusCode.BadRequest, response.status)
     }
+
+    @Test
+    fun `should get studio by code`() = testApplication {
+        application {
+            configureTestApp()
+        }
+        val client = createClient {
+            install(ContentNegotiation) {
+                json()
+            }
+        }
+        val response = client.get("/studios/GW")
+        assertEquals(HttpStatusCode.OK, response.status)
+        val studio = response.body<Studio>()
+        assertEquals(Studio("GirlsWay", "GW"), studio)
+    }
+
+    @Test
+    fun `doesn't find studio`() = testApplication {
+        application {
+            configureTestApp()
+        }
+        val client = createClient {
+            install(ContentNegotiation) {
+                json()
+            }
+        }
+        val response = client.get("/studios/AB")
+        assertEquals(HttpStatusCode.NotFound, response.status)
+    }
 }

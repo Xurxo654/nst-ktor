@@ -1,7 +1,7 @@
 package nst.api
 
 class ListStudioRepository: StudioRepository {
-    private val studios = mutableListOf<Studio>(
+    private val studios = mutableListOf(
         Studio("GirlsWay", "GW"),
         Studio("Hot and Mean", "HAM"),
         Studio("MetArt", "MA"),
@@ -11,9 +11,11 @@ class ListStudioRepository: StudioRepository {
     override fun allStudios(): List<Studio> = studios
 
     override fun addStudio(studio: Studio) {
-        if (studios.map { it -> it.code }.contains(studio.code)) {
+        if (studios.map { it.code }.contains(studio.code)) {
             throw IllegalArgumentException("${studio.code} already in use")
         }
         studios.add(studio)
     }
+
+    override fun getStudio(code: String): Studio? = studios.find { it.code == code }
 }

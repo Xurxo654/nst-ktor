@@ -26,10 +26,15 @@ suspend fun Application.configureRouting() {
                 call.respond(HttpStatusCode.BadRequest)
             } catch (_: SerializationException) {
                 call.respond(HttpStatusCode.BadRequest)
-            } catch (ex: IllegalArgumentException) {
+            } catch (_: IllegalArgumentException) {
                 call.respond(HttpStatusCode.BadRequest)
             }
 
+        }
+        get("/studios/{code}") {
+            val code = call.parameters["code"] ?: ""
+            val studio = repository.getStudio(code) ?: return@get call.respond(HttpStatusCode.NotFound)
+            call.respond(studio)
         }
         staticResources("/static", "static")
 

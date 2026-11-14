@@ -14,3 +14,7 @@ This is my attempt to make the naughty stuff and things api utilizing kotlin and
 - Refactored studios POST endpoint to prevent creation of duplicate studio codes
   - refactored ListStudioRepository to throw an `IllegalArgumentException` when there is an existing studio with the code of the new studio
   - refactored `Routing.kt` to catch an `IllegalArgumentException`
+- Added test for requirement "Application needs a get endpoint to retrieve a single studio"
+- Implemented code for "Application needs a get endpoint to retrieve a single studio"
+  - refactored Studio repository to add `getByCode()`
+  - added `studios\{code}` endpoint
