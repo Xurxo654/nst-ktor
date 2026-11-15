@@ -38,6 +38,7 @@ suspend fun Application.configureRouting() {
         }
         get("/scenes/{id}") {
             val scene = Scene(
+                1,
                 "The Pledge: Part One",
                 "Serena Blair takes advantage of eager pledge, Ashley Adams",
                 10,

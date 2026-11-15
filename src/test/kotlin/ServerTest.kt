@@ -137,13 +137,14 @@ class ServerTest {
             }
         }
         val expected = Scene(
+            1,
             "The Pledge: Part One",
             "Serena Blair takes advantage of eager pledge, Ashley Adams",
             10,
             "2016-04-29",
             Studio("Web Young", "WY")
         )
-        val response = client.get("/scenes/AB")
+        val response = client.get("/scenes/1")
         assertEquals(HttpStatusCode.OK, response.status)
         val scene = response.body<Scene>()
         assertEquals(expected, scene)

@@ -23,3 +23,9 @@ This is my attempt to make the naughty stuff and things api utilizing kotlin and
 While writing the requirements for `Scene` I was thinking about how to handle imprecise dates for when I only know the year or month and year that a scene was released. I found that a way to handle this is to store the release date but also have a second field that tracks the precision (year, month, day). When the day is not know the date uses the first of the month in the date field and then records that month is the most precise part of the date. When a month is not know, the date defaults to january 1 of the year and year is recorded as the most precise date known.
 ## Progress
 - Started writing basic requirements for `Scene`
+- Created `Scene` class
+- Created get single scene endpoint
+- Added requirement that `Scene` needs unique ID
+- Implemented unique ID on `Scene`
+- refactored get scene by id test
+- refactored routing to return updated scene
