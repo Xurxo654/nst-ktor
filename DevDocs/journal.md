@@ -4,7 +4,7 @@ This is my attempt to make the naughty stuff and things api utilizing kotlin and
 ## Progress
 - Started requirements for Studio
 - Started Implementation and testing for studio requirements 
-# 26-11-24
+# 26-11-14
 ## Progress
 - Added a post endpoint to studios
   - to support this I created a `StudioRepository`interface and a list based implementation for it
@@ -18,3 +18,8 @@ This is my attempt to make the naughty stuff and things api utilizing kotlin and
 - Implemented code for "Application needs a get endpoint to retrieve a single studio"
   - refactored Studio repository to add `getByCode()`
   - added `studios\{code}` endpoint
+# 26-11-15
+## Research
+While writing the requirements for `Scene` I was thinking about how to handle imprecise dates for when I only know the year or month and year that a scene was released. I found that a way to handle this is to store the release date but also have a second field that tracks the precision (year, month, day). When the day is not know the date uses the first of the month in the date field and then records that month is the most precise part of the date. When a month is not know, the date defaults to january 1 of the year and year is recorded as the most precise date known.
+## Progress
+- Started writing basic requirements for `Scene`
