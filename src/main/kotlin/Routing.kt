@@ -36,6 +36,16 @@ suspend fun Application.configureRouting() {
             val studio = repository.getStudio(code) ?: return@get call.respond(HttpStatusCode.NotFound)
             call.respond(studio)
         }
+        get("/scenes/{id}") {
+            val scene = Scene(
+                "The Pledge: Part One",
+                "Serena Blair takes advantage of eager pledge, Ashley Adams",
+                10,
+                "2016-04-29",
+                Studio("Web Young", "WY")
+            )
+            call.respond(scene)
+        }
         staticResources("/static", "static")
 
     }
