@@ -36,6 +36,23 @@ suspend fun Application.configureRouting() {
             val studio = repository.getStudio(code) ?: return@get call.respond(HttpStatusCode.NotFound)
             call.respond(studio)
         }
+        get("/scenes") {
+            val scenes = listOf(
+                Scene(1,
+                    "The Pledge: Part One",
+                    "Serena Blair takes advantage of eager pledge, Ashley Adams",
+                    10,
+                    "2016-04-29",
+                    Studio("Web Young", "WY")),
+                Scene(2,
+                    "The Pledge: Part Two",
+                    "Serena needs further convincing that Ashley is up for sisterhood.",
+                    10,
+                    "2016-05-13",
+                    Studio("Web Young", "WY"))
+            )
+            call.respond(scenes)
+        }
         get("/scenes/{id}") {
             val scene = Scene(
                 1,
