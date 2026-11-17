@@ -149,4 +149,34 @@ class ServerTest {
         val scene = response.body<Scene>()
         assertEquals(expected, scene)
     }
+
+    @Test
+    fun `should get all scenes`() = testApplication {
+        application {
+            configureTestApp()
+        }
+        val client = createClient {
+            install(ContentNegotiation) {
+                json()
+            }
+        }
+        val expectedScenes = listOf(
+            Scene(1,
+                "The Pledge: Part One",
+                "Serena Blair takes advantage of eager pledge, Ashley Adams",
+                10,
+                "2016-04-29",
+                Studio("Web Young", "WY")),
+            Scene(2,
+                "The Pledge: Part Two",
+                "Serena needs further convincing that Ashley is up for sisterhood.",
+                10,
+                "2016-05-13",
+                Studio("Web Young", "WY"))
+        )
+        val response = client.get("/scenes")
+        assertEquals(HttpStatusCode.OK, response.status)
+        val scenes = response.body<List<Scene>>()
+        assertEquals(expectedScenes, scenes)
+    }
 }
