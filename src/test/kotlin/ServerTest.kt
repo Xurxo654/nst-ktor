@@ -179,4 +179,46 @@ class ServerTest {
         val scenes = response.body<List<Scene>>()
         assertEquals(expectedScenes, scenes)
     }
+
+    @Test
+    fun `POST scenes with only required fields creates scene`() = testApplication {
+        application {
+            configureTestApp()
+        }
+        val client = createClient {
+            install(ContentNegotiation) {
+                json()
+            }
+        }
+        val toCreate = SceneCreationRequest(
+            title = "The Pledge: One Year Later",
+            studioCode = "WY",
+            releaseDate = null,
+            description = null,
+            rating = null
+        )
+        val response = client.post("/scenes") {
+                header(HttpHeaders.ContentType, ContentType.Application.Json)
+                setBody(toCreate)
+        }
+        assertEquals(HttpStatusCode.Created, response.status)
+    }
+
+    @Test
+    fun `POST scenes without required fields returns 400`() = testApplication {
+        application {
+            configureTestApp()
+        }
+        val client = createClient {
+            install(ContentNegotiation) {
+                json()
+            }
+        }
+        val response = client.post("/scenes") {
+           header(HttpHeaders.ContentType, ContentType.Application.Json)
+           setBody("""{"title":"The Pledge: One Year Later"}""")
+        }
+        assertEquals(HttpStatusCode.BadRequest, response.status)
+
+    }
 }

@@ -33,3 +33,4 @@ While writing the requirements for `Scene` I was thinking about how to handle im
 ## Progress
 - Added and implemented requirement: Application needs a get endpoint to retrieve all scenes
 - Added requirements for creating a scene
+- created tests for creating a scene
