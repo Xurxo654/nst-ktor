@@ -29,3 +29,7 @@ While writing the requirements for `Scene` I was thinking about how to handle im
 - Implemented unique ID on `Scene`
 - refactored get scene by id test
 - refactored routing to return updated scene
+# 26-11-16
+## Progress
+- Added and implemented requirement: Application needs a get endpoint to retrieve all scenes
+- Added requirements for creating a scene

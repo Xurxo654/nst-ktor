@@ -14,4 +14,7 @@
 - [x] Scene datatype should have a release date as a string following ISO 8601 partial strings (2019, 2019-03, 2019-03-14)
 - [x] Scene datatype should have a unique ID
 - [x] Application needs a get endpoint to retrieve a single scene by ID
-- [ ] Application needs a get endpoint to retrieve all scenes
+- [x] Application needs a get endpoint to retrieve all scenes
+- [ ] Application needs a post endpoint to create a scene
+  - [ ] at a minimum the post method requires a title and a studio
+  - [ ] the post endpoint can also accept release date, description, rating
