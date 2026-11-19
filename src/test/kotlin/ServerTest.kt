@@ -224,4 +224,40 @@ class ServerTest {
         assertEquals(HttpStatusCode.BadRequest, response.status)
 
     }
+
+    @Test
+    fun `POST scenes with optional fields creates scene`() = testApplication {
+        application {
+            configureTestApp()
+        }
+        val client = createClient {
+            install(ContentNegotiation) {
+                json()
+            }
+        }
+        val request = SceneCreationRequest(
+            title = "The Pledge: One Year Later",
+            studioCode = "WY",
+            releaseDate = "2017-07-30",
+            description = "One year later Ashley wants to move on but still succumbs to Serena.",
+            rating = 9,
+        )
+        val response = client.post("/scenes") {
+            header(HttpHeaders.ContentType, ContentType.Application.Json)
+            setBody(request)
+        }
+        assertEquals(HttpStatusCode.Created, response.status)
+        val expectedScene = Scene(
+            title = "The Pledge: One Year Later",
+            id = 3,
+            releaseDate = "2017-07-30",
+            description = "One year later Ashley wants to move on but still succumbs to Serena.",
+            rating = 9,
+            studio = Studio("Web Young", "WY")
+        )
+        val getScene = client.get("/scenes/3")
+        val actualScene = getScene.body<Scene>()
+        assertEquals(expectedScene, actualScene)
+
+    }
 }
