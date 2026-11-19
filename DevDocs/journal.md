@@ -34,3 +34,9 @@ While writing the requirements for `Scene` I was thinking about how to handle im
 - Added and implemented requirement: Application needs a get endpoint to retrieve all scenes
 - Added requirements for creating a scene
 - created tests for creating a scene
+# 26-11-18
+## Research
+While trying to make a simple list based implementation of my `SceneRepository` I discovered a challenge with mocking data. In practice, the `SceneRepository` won't store the `Studio` but store the `studioCode` as a foreign key. In order to simulate this I had to create a `SceneDAO` class and convert that to a `Scene` by using both the `SceneRepository` and `StudioRepository`
+## Progress
+- Created `SceneRepository` Interface
+- Implemented `SceneRepository` on `ListSceneRepository`

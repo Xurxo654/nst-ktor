@@ -8,5 +8,8 @@ fun Application.configureDependencyInjection() {
         provide<StudioRepository> {
             ListStudioRepository()
         }
+        provide<SceneRepository> {
+            ListSceneRepository()
+        }
     }
 }

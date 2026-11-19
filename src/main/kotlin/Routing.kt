@@ -11,6 +11,7 @@ import kotlinx.serialization.SerializationException
 
 suspend fun Application.configureRouting() {
     val repository = dependencies.resolve<StudioRepository>()
+    val sceneRepository = dependencies.resolve<SceneRepository>()
 
     routing {
         get("/studios") {
@@ -37,30 +38,25 @@ suspend fun Application.configureRouting() {
             call.respond(studio)
         }
         get("/scenes") {
-            val scenes = listOf(
-                Scene(1,
-                    "The Pledge: Part One",
-                    "Serena Blair takes advantage of eager pledge, Ashley Adams",
-                    10,
-                    "2016-04-29",
-                    Studio("Web Young", "WY")),
-                Scene(2,
-                    "The Pledge: Part Two",
-                    "Serena needs further convincing that Ashley is up for sisterhood.",
-                    10,
-                    "2016-05-13",
-                    Studio("Web Young", "WY"))
-            )
+            val sceneDaos = sceneRepository.getScenes()
+            val scenes = sceneDaos.map { it ->
+                val studio = repository.getStudio(it.studioCode) ?: return@get call.respond(HttpStatusCode.InternalServerError)
+                Scene(it.id, it.title, it.description, it.rating, it.releaseDate, studio)
+            }
+
             call.respond(scenes)
         }
         get("/scenes/{id}") {
+            val id = call.parameters["id"]?.toLong() ?: return@get call.respond(HttpStatusCode.BadRequest)
+            val dao = sceneRepository.getSceneById(id) ?: return@get call.respond(HttpStatusCode.NotFound)
+            val studio = repository.getStudio(dao.studioCode) ?: return@get call.respond(HttpStatusCode.InternalServerError)
             val scene = Scene(
-                1,
-                "The Pledge: Part One",
-                "Serena Blair takes advantage of eager pledge, Ashley Adams",
-                10,
-                "2016-04-29",
-                Studio("Web Young", "WY")
+                dao.id,
+                dao.title,
+                dao.description,
+                dao.rating,
+                dao.releaseDate,
+                studio
             )
             call.respond(scene)
         }

@@ -6,7 +6,7 @@ class ListStudioRepository: StudioRepository {
         Studio("Hot and Mean", "HAM"),
         Studio("MetArt", "MA"),
         Studio("MetArtX", "MAX"),
-        Studio("VivThomas", "VT")
+        Studio("Web Young", "WY")
     )
     override fun allStudios(): List<Studio> = studios
 
