@@ -40,3 +40,6 @@ While trying to make a simple list based implementation of my `SceneRepository` 
 ## Progress
 - Created `SceneRepository` Interface
 - Implemented `SceneRepository` on `ListSceneRepository`
+- Refactored tests to accommodate `SceneRepository`
+- Created test for POST scenes with optional fields creates scene
+- Implemented scenes POST method

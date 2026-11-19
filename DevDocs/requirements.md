@@ -16,5 +16,5 @@
 - [x] Application needs a get endpoint to retrieve a single scene by ID
 - [x] Application needs a get endpoint to retrieve all scenes
 - [ ] Application needs a post endpoint to create a scene
-  - [ ] at a minimum the post method requires a title and a studio
-  - [ ] the post endpoint can also accept release date, description, rating
+  - [x] at a minimum the post method requires a title and a studio
+  - [x] the post endpoint can also accept release date, description, rating

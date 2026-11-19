@@ -23,8 +23,6 @@ suspend fun Application.configureRouting() {
                 val studio = call.receive<Studio>()
                 repository.addStudio(studio)
                 call.respond(HttpStatusCode.Created)
-            } catch (_: IllegalStateException) {
-                call.respond(HttpStatusCode.BadRequest)
             } catch (_: SerializationException) {
                 call.respond(HttpStatusCode.BadRequest)
             } catch (_: IllegalArgumentException) {
@@ -63,6 +61,8 @@ suspend fun Application.configureRouting() {
         post("scenes") {
             try {
                 val request = call.receive<SceneCreationRequest>()
+                sceneRepository.createScene(request)
+                call.respond(HttpStatusCode.Created)
             } catch (_: SerializationException) {
                 call.respond(HttpStatusCode.BadRequest)
             }
