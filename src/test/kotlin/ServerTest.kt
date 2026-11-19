@@ -15,6 +15,9 @@ suspend fun Application.configureTestApp() {
         provide<StudioRepository> {
             ListStudioRepository()
         }
+        provide<SceneRepository> {
+            ListSceneRepository()
+        }
     }
     configureSerialization()
     configureRouting()
@@ -49,7 +52,7 @@ class ServerTest {
             Studio("Hot and Mean", "HAM"),
             Studio("MetArt", "MA"),
             Studio("MetArtX", "MAX"),
-            Studio("VivThomas", "VT")
+            Studio("Web Young", "WY")
         )
         assertContentEquals(expectedStudios, results)
     }
@@ -64,7 +67,7 @@ class ServerTest {
                 json()
             }
         }
-        val studio = Studio("Webyoung", "WY")
+        val studio = Studio("VivThomas", "VT")
         val postResponse = client.post("/studios") {
             header(HttpHeaders.ContentType, ContentType.Application.Json)
             setBody(studio)
