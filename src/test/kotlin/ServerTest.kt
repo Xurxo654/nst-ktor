@@ -258,6 +258,29 @@ class ServerTest {
         val getScene = client.get("/scenes/3")
         val actualScene = getScene.body<Scene>()
         assertEquals(expectedScene, actualScene)
+    }
 
+    @Test
+    fun `POST with duplicate studio and title returns bad request`() = testApplication {
+        application {
+            configureTestApp()
+        }
+        val client = createClient {
+            install(ContentNegotiation) {
+                json()
+            }
+        }
+        val request = SceneCreationRequest(
+            title = "The Pledge: Part One",
+            studioCode = "WY",
+            releaseDate = null,
+            description = null,
+            rating = 9,
+        )
+        val response = client.post("/scenes") {
+            header(HttpHeaders.ContentType, ContentType.Application.Json)
+            setBody(request)
+        }
+        assertEquals(HttpStatusCode.BadRequest, response.status)
     }
 }

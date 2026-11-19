@@ -18,3 +18,4 @@
 - [ ] Application needs a post endpoint to create a scene
   - [x] at a minimum the post method requires a title and a studio
   - [x] the post endpoint can also accept release date, description, rating
+  - [ ] A scene from a studio cannot have the same title as another scene from the same studio
