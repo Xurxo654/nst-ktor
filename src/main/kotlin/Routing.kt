@@ -60,6 +60,13 @@ suspend fun Application.configureRouting() {
             )
             call.respond(scene)
         }
+        post("scenes") {
+            try {
+                val request = call.receive<SceneCreationRequest>()
+            } catch (_: SerializationException) {
+                call.respond(HttpStatusCode.BadRequest)
+            }
+        }
         staticResources("/static", "static")
 
     }
