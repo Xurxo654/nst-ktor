@@ -23,111 +23,7 @@ suspend fun Application.configureTestApp() {
     configureRouting()
 }
 
-class ServerTest {
-
-    @Test
-    fun `test studio get endpoint`() = testApplication {
-        // loads default configuration
-        application {
-            configureTestApp()
-        }
-        // verify server studios returns 200
-        assertEquals(HttpStatusCode.OK, client.get("/studios").status)
-    }
-
-    @Test
-    fun `studios can be retrieved`() = testApplication {
-        application {
-            configureTestApp()
-        }
-        val client = createClient {
-            install(ContentNegotiation) {
-                json()
-            }
-        }
-        val response = client.get("/studios")
-        val results = response.body<List<Studio>>()
-        val expectedStudios = listOf(
-            Studio("GirlsWay", "GW"),
-            Studio("Hot and Mean", "HAM"),
-            Studio("MetArt", "MA"),
-            Studio("MetArtX", "MAX"),
-            Studio("Web Young", "WY")
-        )
-        assertContentEquals(expectedStudios, results)
-    }
-
-    @Test
-    fun `new studio can be created`() = testApplication {
-        application {
-            configureTestApp()
-        }
-        val client = createClient {
-            install(ContentNegotiation) {
-                json()
-            }
-        }
-        val studio = Studio("VivThomas", "VT")
-        val postResponse = client.post("/studios") {
-            header(HttpHeaders.ContentType, ContentType.Application.Json)
-            setBody(studio)
-        }
-        assertEquals(HttpStatusCode.Created, postResponse.status)
-
-        val getResponse = client.get("/studios")
-        assertEquals(HttpStatusCode.OK, getResponse.status)
-
-        val studios = getResponse.body<List<Studio>>()
-        assertContains(studios, studio)
-    }
-
-    @Test
-    fun `cannot create studio with duplicate code`() = testApplication {
-        application {
-            configureTestApp()
-        }
-        val client = createClient {
-            install(ContentNegotiation) {
-                json()
-            }
-        }
-        val studio = Studio("GirlsWay", "GW")
-        val response = client.post("/studios") {
-            header(HttpHeaders.ContentType, ContentType.Application.Json)
-            setBody(studio)
-        }
-        assertEquals(HttpStatusCode.BadRequest, response.status)
-    }
-
-    @Test
-    fun `should get studio by code`() = testApplication {
-        application {
-            configureTestApp()
-        }
-        val client = createClient {
-            install(ContentNegotiation) {
-                json()
-            }
-        }
-        val response = client.get("/studios/GW")
-        assertEquals(HttpStatusCode.OK, response.status)
-        val studio = response.body<Studio>()
-        assertEquals(Studio("GirlsWay", "GW"), studio)
-    }
-
-    @Test
-    fun `doesn't find studio`() = testApplication {
-        application {
-            configureTestApp()
-        }
-        val client = createClient {
-            install(ContentNegotiation) {
-                json()
-            }
-        }
-        val response = client.get("/studios/AB")
-        assertEquals(HttpStatusCode.NotFound, response.status)
-    }
+class SceneTest {
 
     @Test
     fun `should get scene`() = testApplication {
@@ -282,5 +178,25 @@ class ServerTest {
             setBody(request)
         }
         assertEquals(HttpStatusCode.BadRequest, response.status)
+    }
+
+    @Test
+    fun `PATCH updates all fields with values`() = testApplication {
+        application {
+            configureTestApp()
+        }
+        val client = createClient {
+            install(ContentNegotiation) {
+                json()
+            }
+        }
+        val request = SceneUpdateRequest("New Pledge: Part Two")
+        val response = client.patch("/scenes/2") {
+            header(HttpHeaders.ContentType, ContentType.Application.Json)
+            setBody(request)
+        }
+        assertEquals(HttpStatusCode.OK, response.status)
+        val scene = response.body<Scene>()
+        assertEquals("New Pledge: Part Two", scene.description)
     }
 }

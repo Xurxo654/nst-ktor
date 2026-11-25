@@ -59,6 +59,11 @@ fun Route.studioRoutes() {
     }
 }
 ```
+PATCH is the appropriate endpoint for partially updating an endpoint.
+Decided the current approach to updating will be to utilize an update request with nullable properties. I'll treat null as not being updated and empty strings as a trigger to update the field to null.
 ## Progress
 - Implemented no duplicate titles per studio requirement
 - Refactored Routing to domain specific files
+- Added Scene update requirement
+- Refactored Tests to split scene and studio tests into separate files
+- Wrote test for updating fields with values
