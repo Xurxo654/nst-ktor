@@ -44,5 +44,21 @@ While trying to make a simple list based implementation of my `SceneRepository` 
 - Created test for POST scenes with optional fields creates scene
 - Implemented scenes POST method
 # 26-11-25
+## Research
+While performing the refactor of `Routing` I first tried to resolve the repositories in the new `xxRoutes` files but that would have required making the functions suspend. 
+I found a simple solution that involved using a property delegate.
+But ultimately decided to stick with resolving the DI in my `Routing` file and passing them to the `xxRoutes`.
+I chose this approach because it kept my DI in a single place and I was worried that the property delegate approach might need more set up when testing the code.
+```kotlin
+// example of property delegate
+fun Route.studioRoutes() {
+    val repository: StudioRepository by application.dependicies
+    
+    route("/studios") {
+        get { call.respond(repository.allStudios())}
+    }
+}
+```
 ## Progress
 - Implemented no duplicate titles per studio requirement
+- Refactored Routing to domain specific files
