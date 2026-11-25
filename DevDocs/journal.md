@@ -43,3 +43,6 @@ While trying to make a simple list based implementation of my `SceneRepository` 
 - Refactored tests to accommodate `SceneRepository`
 - Created test for POST scenes with optional fields creates scene
 - Implemented scenes POST method
+# 26-11-25
+## Progress
+- Implemented no duplicate titles per studio requirement

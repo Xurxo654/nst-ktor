@@ -15,7 +15,7 @@
 - [x] Scene datatype should have a unique ID
 - [x] Application needs a get endpoint to retrieve a single scene by ID
 - [x] Application needs a get endpoint to retrieve all scenes
-- [ ] Application needs a post endpoint to create a scene
+- [x] Application needs a post endpoint to create a scene
   - [x] at a minimum the post method requires a title and a studio
   - [x] the post endpoint can also accept release date, description, rating
-  - [ ] A scene from a studio cannot have the same title as another scene from the same studio
+  - [x] A scene from a studio cannot have the same title as another scene from the same studio

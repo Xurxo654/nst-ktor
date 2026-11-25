@@ -20,6 +20,8 @@ class ListSceneRepository: SceneRepository {
 
     override fun createScene(request: SceneCreationRequest){
         val id = scenes.maxBy { it.id }.id + 1
+        val exists = scenes.find { it.title == request.title && it.studioCode == request.studioCode }
+        if(exists != null) throw IllegalArgumentException("Scene with title ${request.title} already exists for studio ${request.studioCode}")
         val scene = SceneDAO(
             id,
             request.title,

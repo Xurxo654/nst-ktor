@@ -65,6 +65,8 @@ suspend fun Application.configureRouting() {
                 call.respond(HttpStatusCode.Created)
             } catch (_: SerializationException) {
                 call.respond(HttpStatusCode.BadRequest)
+            } catch (_: IllegalArgumentException) {
+                call.respond(HttpStatusCode.BadRequest)
             }
         }
         staticResources("/static", "static")
