@@ -38,4 +38,8 @@ class ListSceneRepository: SceneRepository {
         scenes.removeAll { it.id == scene.id }
         scenes.add(scene)
     }
+
+    override fun deleteScene(id: Long) {
+        scenes.removeAll { it.id == id }
+    }
 }

@@ -4,6 +4,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
+import io.ktor.server.routing.delete
 import io.ktor.server.routing.get
 import io.ktor.server.routing.patch
 import io.ktor.server.routing.post
@@ -59,6 +60,11 @@ fun Route.sceneRoutes(repository: SceneRepository, studioRepository: StudioRepos
             val scene = dao.applyChanges(request)
             repository.saveScene(scene)
             call.respond(HttpStatusCode.OK)
+        }
+        delete("/{id}") {
+            val id = call.parameters["id"]?.toLong() ?: return@delete call.respond(HttpStatusCode.BadRequest)
+            repository.deleteScene(id)
+            call.respond(HttpStatusCode.NoContent)
         }
     }
 }

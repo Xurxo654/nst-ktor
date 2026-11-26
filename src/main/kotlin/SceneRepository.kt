@@ -5,4 +5,5 @@ interface SceneRepository {
     fun getSceneById(id: Long): SceneDAO?
     fun createScene(request: SceneCreationRequest)
     fun saveScene(scene: SceneDAO)
+    fun deleteScene(id: Long)
 }
