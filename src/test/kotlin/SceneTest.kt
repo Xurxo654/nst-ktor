@@ -18,19 +18,6 @@ import nst.api.repositories.SceneRepository
 import nst.api.repositories.StudioRepository
 import kotlin.test.*
 
-suspend fun Application.configureTestApp() {
-    dependencies {
-        provide<StudioRepository> {
-            ListStudioRepository()
-        }
-        provide<SceneRepository> {
-            ListSceneRepository()
-        }
-    }
-    configureSerialization()
-    configureRouting()
-}
-
 class SceneTest {
 
     @Test

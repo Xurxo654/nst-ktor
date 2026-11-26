@@ -1,47 +1,24 @@
 package nst.api
 
-import io.ktor.client.call.body
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.request.get
-import io.ktor.client.request.header
-import io.ktor.client.request.post
-import io.ktor.client.request.setBody
-import io.ktor.http.ContentType
-import io.ktor.http.HttpHeaders
-import io.ktor.http.HttpStatusCode
-import io.ktor.serialization.kotlinx.json.json
-import io.ktor.server.application.Application
-import io.ktor.server.plugins.di.dependencies
-import io.ktor.server.testing.testApplication
+import io.ktor.client.call.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.testing.*
 import nst.api.models.Studio
-import nst.api.repositories.ListSceneRepository
-import nst.api.repositories.ListStudioRepository
-import nst.api.repositories.SceneRepository
-import nst.api.repositories.StudioRepository
 import kotlin.test.Test
 import kotlin.test.assertContains
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 
-suspend fun Application.configureStudioTest() {
-    dependencies {
-        provide<StudioRepository> {
-            ListStudioRepository()
-        }
-        provide<SceneRepository>() {
-            ListSceneRepository()
-        }
-    }
-    configureSerialization()
-    configureRouting()
-}
 
 class StudioTest {
     @Test
     fun `test studio get endpoint`() = testApplication {
         // loads default configuration
         application {
-            configureStudioTest()
+            configureTestApp()
         }
         // verify server studios returns 200
         assertEquals(HttpStatusCode.OK, client.get("/studios").status)
@@ -50,7 +27,7 @@ class StudioTest {
     @Test
     fun `studios can be retrieved`() = testApplication {
         application {
-            configureStudioTest()
+            configureTestApp()
         }
         val client = createClient {
             install(ContentNegotiation) {
@@ -72,7 +49,7 @@ class StudioTest {
     @Test
     fun `new studio can be created`() = testApplication {
         application {
-            configureStudioTest()
+            configureTestApp()
         }
         val client = createClient {
             install(ContentNegotiation) {
@@ -96,7 +73,7 @@ class StudioTest {
     @Test
     fun `cannot create studio with duplicate code`() = testApplication {
         application {
-            configureStudioTest()
+            configureTestApp()
         }
         val client = createClient {
             install(ContentNegotiation) {
@@ -114,7 +91,7 @@ class StudioTest {
     @Test
     fun `should get studio by code`() = testApplication {
         application {
-            configureStudioTest()
+            configureTestApp()
         }
         val client = createClient {
             install(ContentNegotiation) {
@@ -130,7 +107,7 @@ class StudioTest {
     @Test
     fun `doesn't find studio`() = testApplication {
         application {
-            configureStudioTest()
+            configureTestApp()
         }
         val client = createClient {
             install(ContentNegotiation) {
