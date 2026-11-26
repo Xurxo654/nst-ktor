@@ -1,4 +1,4 @@
-package nst.api
+package nst.api.models
 
 data class SceneDAO (
     val id : Long,

@@ -1,4 +1,6 @@
-package nst.api
+package nst.api.repositories
+
+import nst.api.models.Studio
 
 class ListStudioRepository: StudioRepository {
     private val studios = mutableListOf(

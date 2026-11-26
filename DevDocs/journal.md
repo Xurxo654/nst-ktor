@@ -74,3 +74,4 @@ Decided the current approach to updating will be to utilize an update request wi
 - Created test for delete
 - Implemented delete method on scenes
 - Created base requirements for people
+- Refactored code into packages for better organization

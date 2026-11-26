@@ -8,8 +8,8 @@ import io.ktor.server.routing.get
 import io.ktor.server.routing.post
 import io.ktor.server.routing.route
 import kotlinx.serialization.SerializationException
-import nst.api.Studio
-import nst.api.StudioRepository
+import nst.api.models.Studio
+import nst.api.repositories.StudioRepository
 
 fun Route.studioRoutes(repository: StudioRepository) {
 

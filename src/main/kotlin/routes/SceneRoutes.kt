@@ -10,12 +10,12 @@ import io.ktor.server.routing.patch
 import io.ktor.server.routing.post
 import io.ktor.server.routing.route
 import kotlinx.serialization.SerializationException
-import nst.api.Scene
-import nst.api.SceneCreationRequest
-import nst.api.SceneRepository
-import nst.api.SceneUpdateRequest
-import nst.api.StudioRepository
-import nst.api.applyChanges
+import nst.api.models.Scene
+import nst.api.models.SceneCreationRequest
+import nst.api.models.SceneUpdateRequest
+import nst.api.repositories.SceneRepository
+import nst.api.repositories.StudioRepository
+import nst.api.models.applyChanges
 
 fun Route.sceneRoutes(repository: SceneRepository, studioRepository: StudioRepository) {
 

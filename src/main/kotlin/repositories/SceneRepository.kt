@@ -1,4 +1,7 @@
-package nst.api
+package nst.api.repositories
+
+import nst.api.models.SceneCreationRequest
+import nst.api.models.SceneDAO
 
 interface SceneRepository {
     fun getScenes(): List<SceneDAO>

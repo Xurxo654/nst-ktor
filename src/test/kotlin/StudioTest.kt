@@ -13,6 +13,11 @@ import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.plugins.di.dependencies
 import io.ktor.server.testing.testApplication
+import nst.api.models.Studio
+import nst.api.repositories.ListSceneRepository
+import nst.api.repositories.ListStudioRepository
+import nst.api.repositories.SceneRepository
+import nst.api.repositories.StudioRepository
 import kotlin.test.Test
 import kotlin.test.assertContains
 import kotlin.test.assertContentEquals

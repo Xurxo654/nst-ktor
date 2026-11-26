@@ -1,19 +1,26 @@
-package nst.api
+package nst.api.repositories
+
+import nst.api.models.SceneCreationRequest
+import nst.api.models.SceneDAO
 
 class ListSceneRepository: SceneRepository {
     private val scenes: MutableList<SceneDAO> = mutableListOf(
-        SceneDAO(1,
+        SceneDAO(
+            1,
             "The Pledge: Part One",
             "WY",
             "Serena Blair takes advantage of eager pledge, Ashley Adams",
             10,
-            "2016-04-29"),
-        SceneDAO(2,
+            "2016-04-29"
+        ),
+        SceneDAO(
+            2,
             "The Pledge: Part Two",
             "WY",
             "Serena needs further convincing that Ashley is up for sisterhood.",
             10,
-            "2016-05-13")
+            "2016-05-13"
+        )
     )
 
     override fun getScenes(): List<SceneDAO> = scenes

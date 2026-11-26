@@ -8,6 +8,14 @@ import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.Application
 import io.ktor.server.plugins.di.dependencies
 import io.ktor.server.testing.*
+import nst.api.models.Scene
+import nst.api.models.SceneCreationRequest
+import nst.api.models.SceneUpdateRequest
+import nst.api.models.Studio
+import nst.api.repositories.ListSceneRepository
+import nst.api.repositories.ListStudioRepository
+import nst.api.repositories.SceneRepository
+import nst.api.repositories.StudioRepository
 import kotlin.test.*
 
 suspend fun Application.configureTestApp() {
@@ -60,18 +68,22 @@ class SceneTest {
             }
         }
         val expectedScenes = listOf(
-            Scene(1,
+            Scene(
+                1,
                 "The Pledge: Part One",
                 "Serena Blair takes advantage of eager pledge, Ashley Adams",
                 10,
                 "2016-04-29",
-                Studio("Web Young", "WY")),
-            Scene(2,
+                Studio("Web Young", "WY")
+            ),
+            Scene(
+                2,
                 "The Pledge: Part Two",
                 "Serena needs further convincing that Ashley is up for sisterhood.",
                 10,
                 "2016-05-13",
-                Studio("Web Young", "WY"))
+                Studio("Web Young", "WY")
+            )
         )
         val response = client.get("/scenes")
         assertEquals(HttpStatusCode.OK, response.status)
@@ -253,12 +265,14 @@ class SceneTest {
         }
         assertEquals(HttpStatusCode.OK, response.status)
         val scene = client.get("/scenes/2").body<Scene>()
-        val expectedScene = Scene(2,
+        val expectedScene = Scene(
+            2,
             "The Pledge: Part Two",
             "Serena needs further convincing that Ashley is up for sisterhood.",
             10,
             "2016-05-13",
-            Studio("Web Young", "WY"))
+            Studio("Web Young", "WY")
+        )
         assertEquals(expectedScene, scene)
     }
 

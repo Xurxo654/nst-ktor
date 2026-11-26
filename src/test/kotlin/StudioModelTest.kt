@@ -1,5 +1,6 @@
 package nst.api
 
+import nst.api.models.Studio
 import org.junit.Test
 import kotlin.test.assertEquals
 

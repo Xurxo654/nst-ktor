@@ -1,4 +1,4 @@
-package nst.api
+package nst.api.models
 
 import kotlinx.serialization.Serializable
 
