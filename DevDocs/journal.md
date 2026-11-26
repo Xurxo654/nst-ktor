@@ -66,4 +66,5 @@ Decided the current approach to updating will be to utilize an update request wi
 - Refactored Routing to domain specific files
 - Added Scene update requirement
 - Refactored Tests to split scene and studio tests into separate files
-- Wrote test for updating fields with values
+- Wrote tests for updating fields with values
+- Implemented method for updating properties of scene

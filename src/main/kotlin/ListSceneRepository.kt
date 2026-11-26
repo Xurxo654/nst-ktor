@@ -33,4 +33,9 @@ class ListSceneRepository: SceneRepository {
         scenes.add(scene)
     }
     override fun getSceneById(id: Long): SceneDAO? = scenes.find { it.id  == id }
+
+    override fun saveScene(scene: SceneDAO) {
+        scenes.removeAll { it.id == scene.id }
+        scenes.add(scene)
+    }
 }
