@@ -20,3 +20,4 @@
   - [x] the post endpoint can also accept release date, description, rating
   - [x] A scene from a studio cannot have the same title as another scene from the same studio
 - [x] Application should have a PATCH endpoint to allow updating description, rating and release date
+- [ ] Application should have a DELETE endpoint to delete a scene

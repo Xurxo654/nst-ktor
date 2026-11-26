@@ -261,4 +261,20 @@ class SceneTest {
             Studio("Web Young", "WY"))
         assertEquals(expectedScene, scene)
     }
+
+    @Test
+    fun `DELETE should delete scene`() = testApplication {
+        application {
+            configureTestApp()
+        }
+        val client = createClient {
+            install(ContentNegotiation) {
+                json()
+            }
+        }
+        val response = client.delete("/scenes/2")
+        assertEquals(HttpStatusCode.NoContent, response.status)
+        val getScene = client.get("/scenes/2")
+        assertEquals(HttpStatusCode.NotFound, getScene.status)
+    }
 }

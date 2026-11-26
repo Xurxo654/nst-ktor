@@ -68,3 +68,7 @@ Decided the current approach to updating will be to utilize an update request wi
 - Refactored Tests to split scene and studio tests into separate files
 - Wrote tests for updating fields with values
 - Implemented method for updating properties of scene
+# 26-11-26
+## Progress
+- Added requirement to be able to delete scenes
+- Created test for delete
