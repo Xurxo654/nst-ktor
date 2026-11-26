@@ -76,3 +76,4 @@ Decided the current approach to updating will be to utilize an update request wi
 - Created base requirements for people
 - Refactored code into packages for better organization
 - Refactored test code
+- Created Get and post tests for people
