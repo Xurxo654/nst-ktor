@@ -20,4 +20,16 @@
   - [x] the post endpoint can also accept release date, description, rating
   - [x] A scene from a studio cannot have the same title as another scene from the same studio
 - [x] Application should have a PATCH endpoint to allow updating description, rating and release date
-- [ ] Application should have a DELETE endpoint to delete a scene
+- [x] Application should have a DELETE endpoint to delete a scene
+# Person
+- [ ] Application needs a data type for representing people
+- [ ] Person datatype should have a name
+- [ ] Person datatype should have a birthdate
+- [ ] Person datatype should have a birth country
+- [ ] Person datatype should have a height
+- [ ] Person datatype should have an eyeColor
+- [ ] Application needs a get endpoint to retrieve a single Person by ID
+- [ ] Application needs a get endpoint to retrieve all people
+- [ ] application needs a post endpoint to create a person
+- [ ] application needs a patch endpoint to allow updating people
+- [ ] application needs a delete endpoint to delete a person

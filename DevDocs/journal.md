@@ -73,3 +73,4 @@ Decided the current approach to updating will be to utilize an update request wi
 - Added requirement to be able to delete scenes
 - Created test for delete
 - Implemented delete method on scenes
+- Created base requirements for people
